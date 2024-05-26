@@ -1,0 +1,4 @@
+prisma
+fastapi
+python-dotenv
+requests

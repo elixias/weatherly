@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator db {
+  provider             = "prisma-client-py"
+  interface            = "asyncio"
+  recursive_type_depth = 5
+}
+
+model Search {
+  id         String   @id @default(cuid())
+  created_at DateTime @default(now())
+  status     Boolean
+  country    String
+  city       String
+  longitude  String
+  latitude   String
+  payload    Json?
+  // main        String
+  // description String
+  // temp_min    Float
+  // temp_max    Float
+}
