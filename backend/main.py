@@ -1,8 +1,8 @@
 # run the server with : fastapi dev main.py
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from data.mock_weather_data import get_mock_data
+# from data.mock_weather_data import get_mock_data
 from dotenv import load_dotenv
 import os
 import requests
@@ -10,7 +10,6 @@ import json
 from prisma import Prisma
 from contextlib import asynccontextmanager
 import logging
-import time
 
 load_dotenv()
 # db = Prisma()
@@ -62,7 +61,8 @@ async def getWeather(country: str, longitude: str, latitude: str, city: str ):
             params={
                 "lat": latitude,
                 "lon": longitude,
-                "appid": os.getenv("WEATHERAPI_KEY")
+                "appid": os.getenv("WEATHERAPI_KEY"),
+                "units":"metric"
             }
         )
 
@@ -79,7 +79,7 @@ async def getWeather(country: str, longitude: str, latitude: str, city: str ):
                 "humidity":payload['main']['humidity'],
                 "temp_min":payload['main']['temp_min'],
                 "temp_max":payload['main']['temp_max'],
-                "datetime":int(time.time()),#payload['dt'],
+                "datetime":payload['dt'],
                 "icon":payload['weather'][0]['icon']
             }
         }
@@ -93,7 +93,8 @@ async def getWeather(country: str, longitude: str, latitude: str, city: str ):
     except Exception as error:
         await saveSearchRecord(False, country, city, longitude, latitude, None)
         logging.error(error)
-        return {"message":"There was an error fetching the requested data."}
+        raise HTTPException(status_code=500, detail="Error fetching requested data")
+        # return {"message":"There was an error fetching the requested data."}
 
 @app.get("/searchHistory")
 async def getSearchHistory():
@@ -105,5 +106,5 @@ async def getSearchHistory():
         },
         take=10
     )
-    await db.disconnct()
+    await db.disconnect()
     return history

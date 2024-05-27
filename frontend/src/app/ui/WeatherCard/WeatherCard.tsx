@@ -27,14 +27,14 @@ function WeatherCard({ weatherData }: { weatherData: IWeatherData }) {
 
                 <Wrapper label="Description"><p>{payload.description}</p></Wrapper>
 
-                <Wrapper label="Temperature"><p>{payload.temp_min}~{payload.temp_max}</p></Wrapper>
+                <Wrapper label="Temperature"><p>{payload.temp_min}~{payload.temp_max} &deg;C</p></Wrapper>
 
                 <Wrapper label="Humidity"><p>{payload.humidity}</p></Wrapper>
 
                 <Wrapper label="Time">
                     <p>
                         {
-                            new Date(payload.datetime).toLocaleTimeString('en-US', {
+                            new Date(payload.datetime * 1000).toLocaleTimeString('en-US', {
                                 hour: '2-digit',
                                 minute: '2-digit',
                                 second: '2-digit',

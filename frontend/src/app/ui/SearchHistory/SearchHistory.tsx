@@ -1,10 +1,11 @@
 import { ISearchHistory, TGeolocation } from '@/app/lib/types';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
-import { Icon, IconButton, Paper } from '@mui/material';
-const SearchHistory = ({ searchHistory, deleteSearchHistory, callWeatherApi }: {
+import { Button, Icon, IconButton, Paper } from '@mui/material';
+const SearchHistory = ({ searchHistory, deleteSearchHistory, callWeatherApi, clearSearchHistory }: {
     searchHistory: ISearchHistory[],
     deleteSearchHistory: (index: number) => void,
+    clearSearchHistory: () => void,
     callWeatherApi: (geolocation: TGeolocation) => Promise<void>
 }) => {
 
@@ -13,7 +14,10 @@ const SearchHistory = ({ searchHistory, deleteSearchHistory, callWeatherApi }: {
 
             <Paper elevation={3} className="p-5 flex flex-col ">
 
-                <div className="font-sans font-medium text-lg mb-5">Search History</div>
+                <div className="mb-5 flex">
+                    <p className="font-sans font-medium text-lg">Search History</p>
+                    <Button className="ml-auto" onClick={clearSearchHistory}>Clear All</Button>
+                </div>
 
                 {
                     searchHistory.map((search, index) => {

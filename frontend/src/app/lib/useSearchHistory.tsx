@@ -37,12 +37,12 @@ const useSearchHistory = () => {
         // window?.localStorage.setItem('searchHistory', JSON.stringify(updatedSearchHistory));
     };
 
-    // const clearSearchHistory = () => {
-    //     updateSearchHistory([]);
-    //     window?.localStorage.setItem('searchHistory', JSON.stringify([]));
-    // };
+    const clearSearchHistory = () => {
+        updateSearchHistory([]);
+        // window?.localStorage.setItem('searchHistory', JSON.stringify([]));
+    };
 
-    return { searchHistory, addSearchHistory, deleteSearchHistory }
+    return { searchHistory, addSearchHistory, deleteSearchHistory, clearSearchHistory }
 }
 
 export default useSearchHistory;

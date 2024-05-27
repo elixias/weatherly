@@ -31,7 +31,7 @@ export default function Home() {
             const response = await axios.get(`${backendUrl}/weather`, {
                 params: {
                     ...geolocation,
-                    units: "metric"
+                    // units: "metric"
                 }
             });
             const reviewedWeatherData: ISearchHistory = {
@@ -51,14 +51,14 @@ export default function Home() {
         <>
             <ThemeProvider theme={theme}>
 
-                <div className="flex flex-col items-center space-y-10 h-screen">
+                <div className="flex flex-col items-center space-y-10 h-screen min-w-min mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-16">
 
                     <div className="text-center">
                         <p className="text-9xl font-sans font-bold gradient-text pt-10">WEATHER.LY</p>
                         <p>Stay in touch with the latest weather updates</p>
                     </div>
 
-                    <div className="w-1/3 h-300">
+                    <div className="w-3/5 min-w-650 h-300">
                         {
                             (weatherDetails !== undefined) ?
                                 <WeatherCard weatherData={weatherDetails} />
@@ -72,7 +72,12 @@ export default function Home() {
                     </div>
 
                     <div className="w-3/5 pb-10">
-                        <SearchHistory searchHistory={searchHistory} callWeatherApi={callWeatherApi} deleteSearchHistory={deleteSearchHistory} />
+                        <SearchHistory
+                            searchHistory={searchHistory}
+                            callWeatherApi={callWeatherApi}
+                            deleteSearchHistory={deleteSearchHistory}
+                            clearSearchHistory={clearSearchHistory}
+                        />
                     </div>
 
                     <Link href="https://github.com/elixias">@github.com/elixias</Link>

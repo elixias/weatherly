@@ -76,7 +76,7 @@ const SearchBar = ({ callWeatherApi }: {
 
                 <div className="font-sans font-medium text-lg mb-5">Check today&apos;s weather</div>
 
-                <div className="w-full flex flex-row space-x-5">
+                <div className="w-full flex flex-wrap md:space-x-5 space-y-5 md:space-y-0 md:flex-nowrap">
                     <Autocomplete
                         disablePortal
                         id="country"
@@ -100,9 +100,10 @@ const SearchBar = ({ callWeatherApi }: {
                         onChange={updateCity}
                     />
 
-                    <Button variant="contained" className="flex-2" onClick={getWeatherDetails} startIcon={<SearchIcon />}>Search</Button>
-
-                    <Button variant="outlined" className="flex-2" onClick={clearSearch}>Clear</Button>
+                    <div className="flex flex-row space-x-5 flex-nowrap">
+                        <Button sx={{ width: 150 }} variant="contained" onClick={getWeatherDetails} startIcon={<SearchIcon />}>Search</Button>
+                        <Button sx={{ width: 150 }} variant="outlined" onClick={clearSearch}>Clear</Button>
+                    </div>
 
                 </div>
 
