@@ -64,9 +64,26 @@ The project was dockerised into containers with the docker-compose.yml file can 
 
 You will need to install docker on your machine before you can continue with the following steps.
 
-## Building and running the application
+## Disclaimer: Unable to get app working with Docker
 
-**Note**: I'm having problems getting frontend to communicate with the backend. The request successfully runs via curl using the http://backend:8000 url, but fails when using the same url from the front end UI. If this doesn't work for you, you'll hve to follow the lengthier step that doesn't use docker-compose (sorry! I've been trying to fix this for hours to no avail!)
+**Note**: I'm having problems getting frontend to communicate with the backend. The request successfully runs via curl using the http://backend:8000 url (service name for the backend), but fails when using the same url from the front end UI. If this doesn't work for you, you'll have to follow the lengthier step that doesn't use docker-compose (sorry! I've been trying to fix this for hours to no avail!)
+
+Things I've tried:
+
+- Specifying the ports when running the commands
+- Using the production mode for both frontend and backend
+- Encapsulating urls in double quotes
+- Tried changing to localhost to make sure it fails (which did so successfully)
+- Tried requesting via the docker container itself using exec (worked)
+- Tried changing the Postgres connection string to make sure i've gotten it correct (codes run in localhost outside docker)
+- Eyeballing the API for GET requests on frontend and backend
+- Pruning docker services/containers/networks etc and reinstalling docker
+
+Things I have not tried:
+
+- Using something other than axios
+
+## Building and running the application
 
 1. You will need to include the .env files for the frontend and backend server to successfully run the docker commands. Comment the env.sample files to use the non-localhost configurations, rename the file to .env.
 
