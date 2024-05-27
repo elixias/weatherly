@@ -66,7 +66,7 @@ You will need to install docker on your machine before you can continue with the
 
 ## Building and running the application (fixed)
 
-1. You will need to include the .env files for the frontend and backend server to successfully run the docker commands. Comment the env.sample files to use the non-localhost configurations, rename the file to .env.
+1. You will need to include the .env files for the frontend and backend server to successfully run the docker commands. Rename the env.sample files to .env and include your own OpenWeatherAPI key.
 
 2. Run `docker-compose build` followed by `docker-compose up` at the root directory.
 
