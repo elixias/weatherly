@@ -27,24 +27,43 @@ export default function Home() {
     }
 
     const callWeatherApi = async (geolocation: TGeolocation) => {
+        const url = `${backendUrl}/weather?${new URLSearchParams(geolocation).toString()}`;
         try {
-            const response = await axios.get(`${backendUrl}/weather`, {
-                params: {
-                    ...geolocation,
-                    // units: "metric"
-                }
-            });
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            console.log(data)
             const reviewedWeatherData: ISearchHistory = {
                 ...geolocation,
                 datetime: getDateTimeNow()
             }
-            if (response.data.payload === undefined)
-                throw new Error(response.data.message)
+            if (data.payload === undefined)
+                throw new Error(data.message)
             addSearchHistory(reviewedWeatherData)
-            updateWeatherDetails(response.data)
+            updateWeatherDetails(data)
         } catch (error) {
-            console.error("There was an error fetching the weather data!", error);
+            console.error('There was a problem with the fetch operation:', error);
         }
+        // try {
+        //     const response = await axios.get(`${backendUrl}/weather`, {
+        //         params: {
+        //             ...geolocation,
+        //             // units: "metric"
+        //         }
+        //     });
+        //     const reviewedWeatherData: ISearchHistory = {
+        //         ...geolocation,
+        //         datetime: getDateTimeNow()
+        //     }
+        //     if (response.data.payload === undefined)
+        //         throw new Error(response.data.message)
+        //     addSearchHistory(reviewedWeatherData)
+        //     updateWeatherDetails(response.data)
+        // } catch (error) {
+        //     console.error("There was an error fetching the weather data!", error);
+        // }
     }
 
     return (
