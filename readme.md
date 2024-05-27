@@ -41,7 +41,7 @@ The Weather.ly app is a submission for a Full Stack Engineer Test with the goal 
 
 ## Sequence Diagram
 
-```
+```mermaid
 sequenceDiagram
     Client->>WeatherlyBackend: GET ("/weather")
     activate WeatherlyBackend
